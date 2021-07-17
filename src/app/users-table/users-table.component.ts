@@ -16,7 +16,7 @@ export class UsersTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = JSON.parse(localStorage.getItem('dataSource')!);
-    console.log(this.data)
+    console.log(this.data);
   }
 
   deleteRow(d:any){
@@ -25,7 +25,7 @@ export class UsersTableComponent implements OnInit {
     // console.log("test")
     localStorage.clear();
   }
-  
+
   editProduct(data:any) {
     console.log(this.data);
     this.route.navigate(['/register']);
