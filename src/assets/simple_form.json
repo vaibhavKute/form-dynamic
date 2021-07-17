@@ -1,0 +1,42 @@
+[
+    {
+        "key" : "email",
+        "type" : "input",
+        "options" : {
+            "label" : "Email",
+            "placeholder" : "abc@gmail.com",
+            "required": true
+        }
+    },
+    {
+        "key" : "password",
+        "type" : "input",
+        "options" : {
+            "label" : "Password",
+            "placeholder" : "123456",
+            "required": true,
+            "type": "password"
+        }
+    },
+    {
+        "key" : "newsletter",
+        "type" : "boolean",
+        "options" : {
+            "label" : "Subscribe to oue newsletter"
+        }
+    },
+    {
+        "key" : "birthday",
+        "type" : "date",
+        "options" : {
+            "label" : "Your Birthday"
+        }
+    },
+    {
+        "key" : "notes",
+        "type" : "text",
+        "options" : {
+            "label" : "Additional notes for us"
+        }
+    }
+]

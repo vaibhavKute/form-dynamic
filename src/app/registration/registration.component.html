@@ -1,0 +1,101 @@
+<ng-template #showPopup>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left"></h4>
+      <button type="button" class="close pull-right" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="saveChanges()">
+      Save changes
+    </button>
+  </ng-template>
+  
+  <section class="py-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 py-5 bg-primary text-white text-center">
+          <div class=" ">
+            <div class="card-body">
+              <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width: 30%" />
+              <h2 class="py-3">Registration</h2>
+              {{userform.value | json}}
+              <p></p>
+            </div>
+          </div>
+        </div>
+  
+    <div class="col-md-8 py-5">
+      <h4 class="pb-4">Please fill with your details</h4>
+      <form class="dynamic-form" [formGroup]="userform" (submit)="onSubmit()">
+        <div *ngFor="let c of regConfig">
+          <label [for]="c.label">{{ c.label }}</label>
+          <div *ngIf="c.type === 'input'">
+            <div class="form-group">
+              <input class="form-control" [formControlName]="c.name" [placeholder]="c.label" [type]="c.type" />
+            </div>
+          </div>
+  
+          <div [ngSwitch]="c.type">
+            <div *ngFor="let f of c?.formArrayoptions?.children">
+              <div *ngSwitchCase="'formArray'" [formArrayName]="c.name">
+                <div class="form-group" *ngFor="let group of getFormArray(c.name).controls; let i = index;">
+                  <div [formGroupName]="i">
+                    <label>{{c.label}} {{i+1}}</label>
+                    <input class="form-control" [formControlName]="f.key" [type]="f.type" />
+                    <span class="material-icons" (click)="removeArrayGroup(c.name, i)">
+                      delete
+                    </span>
+                  </div>
+                </div>
+                <button class="btn btn-primary mt-4 mb-4 addArray" (click)="addArrayGroup(c.name, c.formArrayoptions?.children)">Add
+                  Group</button>
+              </div>
+            </div>
+          </div>
+  
+          <div *ngIf="c.type === 'select'">
+            <div class="form-group">
+              <select class="form-control" [formControlName]="c.name">
+                <option [ngValue]="null" disabled>Select</option>
+                <option *ngFor="let opt of c.options" [ngValue]="opt">
+                  {{ opt }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div *ngIf="c.type === 'checkbox'">
+            <div class="form-group">
+              <input [formControlName]="c.name" type="checkbox"
+                (change)="changeCheckboxStatus($event)" />
+            </div>
+          </div>
+          <div *ngIf="c.type === 'date'">
+            <div class="form-group">
+              <input class="form-control" [formControlName]="c.name" [placeholder]="c.label" [type]="c.type" />
+            </div>
+          </div>
+          <div *ngIf="c.type === 'radio'">
+            <div class="form-group">
+              <div *ngFor="let radiobutton of c.options; let i = index">
+                <input [type]="c.type" [name]="c.name" [formControlName]="c.name" [value]="radiobutton"
+                  (change)="isRadioChange(radiobutton)" />
+                {{ radiobutton }}
+              </div>
+            </div>
+          </div>
+          <ng-container *ngFor="let validation of c.validations">
+            <div class="mt-1 mb-1" *ngIf="
+                  userform.get(c.name)?.errors?.required &&
+                  userform.get(c.name)?.touched
+                ">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+  
+        <button class="btn btn-danger" id="btn" [disabled]="userform.invalid">Submit</button>
+      </form>
+    </div>
+  </div>
+    </div>
+  </section>

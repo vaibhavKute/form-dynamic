@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- <div class="container mt-4">
+    <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+
+        <div *ngFor="let c of advancedForm">
+            <div [ngSwitch]="c.type">
+                 <div *ngSwitchCase="'group'" [formGroupName]="c.key">
+                    <ul *ngFor="let child of c.options.children">
+                        <p>{{child.options.label}}</p>
+                        <input [formControlName]="child.key" [placeholder]="child.options.placeholder">
+                    </ul>
+                 </div>
+
+                 <div *ngSwitchCase="'array'" [formArrayName]="c.key">
+                    <div *ngFor="let group of getFormArray(c.key).controls; let i = index">
+                        <div [formGroupName]="i">
+                            <p>{{c.key}} {{i + 1}}</p>
+                        </div>
+                        <div>
+                            <ul *ngFor="let child of c.options.children">
+                                <p>{{child.options.label}}</p>
+                                <input [formControlName]="child.key" [placeholder]="child.options.placeholder">
+                            </ul>
+                            <button class="btn btn-danger" fill="color" (click)="removeArrayGroup(c.key,i)">Remove</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-success mt-4 mb-4" (click)="addArrayGroup(c.key, c.options.children)">Add</button>
+                 </div>
+            </div>
+        </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div> -->
+
+
+
+  <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+    <div *ngFor="let c of mainForm">
+      <div [ngSwitch]="c.type" [formArrayName]="c.name">
+        <div *ngFor="let group of getFormArray(c.name).controls; let i = index">
+          <div [formGroupName]="i">
+            <p>{{c.name}} {{i + 1}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

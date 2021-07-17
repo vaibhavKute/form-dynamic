@@ -1,0 +1,39 @@
+[
+    {
+        "key" : "address",
+        "type" : "group",
+        "options" : {
+            "children" : [{
+                "key" : "address",
+                "type" : "input",
+                "options" : {
+                    "label": "Full Name",
+                    "placeholder": "Vaibhav"
+                }
+            },
+            {   
+                "key" : "street",
+                "type" : "input",
+                "options": {
+                    "label": "Street",
+                    "placeholder": "MG Road"
+                }
+
+            }]
+        }
+    },
+    {
+        "key" : "phone",
+        "type" : "array",
+        "options": {
+            "children":[{
+                "key": "phoneNumber",
+                "type": "input",
+                "options": {
+                    "label": "Phone No.",
+                    "placeholder": "9889646456"
+                }
+            }]
+        }
+    }
+]
